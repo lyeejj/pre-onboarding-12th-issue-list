@@ -1,25 +1,46 @@
-import React from 'react';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { getIssueList } from '../api/api';
 import { IssueListType } from '../utils/types/issueList.interface';
 import Spinner from '../components/layout/Spinner';
+import IssueItem from '../components/IssueItem';
+import { useNavigate } from 'react-router-dom';
 
 function IssueList() {
 	const [list, setList] = useState<IssueListType[]>([]);
 	const [pageNumber, setPageNumber] = useState<number>(1);
 	const [loading, setLoading] = useState<boolean>(true);
+	const navigate = useNavigate();
+
+	const observerRef = useRef<any>(null);
 
 	useEffect(() => {
-		getIssueList(pageNumber).then((issues: any) => {
-			setList(issues);
-			setLoading(false);
-		});
-	}, [pageNumber]);
+		getIssueList(pageNumber)
+			.then((issues: any) => {
+				setList(prevList => [...prevList, ...issues]);
+				setLoading(false);
+			})
+			.catch(error => {
+				navigate('/error');
+			});
+	}, [pageNumber, navigate]);
 
-	// eslint-disable-next-line no-unused-vars
-	const loadMore = () => {
-		setPageNumber(prev => prev + 1);
-	};
+	useEffect(() => {
+		const observer = new IntersectionObserver(
+			entries => {
+				if (entries[0].isIntersecting) {
+					setPageNumber(prev => prev + 1);
+				}
+			},
+			{ threshold: 1 },
+		);
+		if (observerRef.current) {
+			observer.observe(observerRef.current);
+		}
+
+		return () => {
+			observer.disconnect();
+		};
+	}, [list]);
 
 	if (loading) return <Spinner />;
 
@@ -27,20 +48,12 @@ function IssueList() {
 		<>
 			<ul>
 				{list.map(item => (
-					<li>
-						<div>
-							<h2>
-								<span>#{item.number}</span> {item.title}
-							</h2>
-							<span>
-								작성자 : {item.user.login}, 작성일 : {item.created_at}
-							</span>
-						</div>
-						<span>댓글수 : {item.comments} </span>
-					</li>
+					<IssueItem item={item} key={item.id} />
 				))}
 			</ul>
+			<div ref={observerRef} style={{ height: '10px' }} />
 		</>
 	);
 }
+
 export default IssueList;
