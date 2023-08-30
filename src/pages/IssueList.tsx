@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { getIssueList } from '../api/api';
 import { IssueListType } from '../utils/types/issueList.interface';
 import Spinner from '../components/layout/Spinner';
@@ -51,7 +51,7 @@ function IssueList() {
 					<IssueItem item={item} key={item.id} />
 				))}
 			</ul>
-			<div ref={observerRef} style={{ height: '10px' }} />
+			<div ref={observerRef} style={{ height: '10px', margin: '1px' }}></div>
 		</>
 	);
 }
