@@ -1,9 +1,9 @@
-import '../../utils/styles/spinner.scss';
+import styles from '../../utils/styles/Spinner.module.scss';
 
 function Spinner() {
 	return (
-		<div className="spinnerOverlay">
-			<div className="spinner"></div>
+		<div className={styles.spinnerOverlay}>
+			<div className={styles.spinner}></div>
 		</div>
 	);
 }
