@@ -11,6 +11,7 @@ export interface IssueListType {
 	user: {
 		id: number;
 		login: string;
+		avatar_url: string;
 	};
 	labels: Label[];
 	state: string;
