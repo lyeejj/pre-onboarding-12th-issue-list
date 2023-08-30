@@ -11,7 +11,9 @@ function Layout({ children }: LayoutProps) {
 	return (
 		<div>
 			<header>
-				{OWNER} / {REPO}
+				<h1>
+					{OWNER} / {REPO}
+				</h1>
 			</header>
 			<main>{children}</main>
 		</div>

@@ -9,6 +9,7 @@ export const getIssueList = async (page: number) => {
 		repo: API_INFO.REPO,
 		state: 'open',
 		sort: 'comments',
+		per_page: 30,
 		page,
 	});
 	return res.data;
