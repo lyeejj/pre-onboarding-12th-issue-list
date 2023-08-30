@@ -5,6 +5,7 @@ import { IssueListType } from '../utils/types/issueList.interface';
 import { getIssueDetail } from '../api/api';
 import IssueItem from '../components/IssueItem';
 import Spinner from '../components/layout/Spinner';
+import styles from '../utils/styles/IssueDetail.module.scss';
 
 function IssueDetail() {
 	const [detail, setDetail] = useState<IssueListType>();
@@ -29,12 +30,17 @@ function IssueDetail() {
 		<>
 			{detail && (
 				<>
-					<img src={detail.user?.avatar_url} alt="user-avatar-img" style={{ width: '100px' }} />
-					<IssueItem item={detail} key={detail.id} />
-					<ReactMarkdown children={detail.body} />
+					<div className={styles['detail-info']}>
+						<img src={detail.user?.avatar_url} alt="user-avatar-img" />
+						<IssueItem item={detail} key={detail.id} />
+					</div>
+					<div className={styles['markdown-container']}>
+						<ReactMarkdown>{detail.body}</ReactMarkdown>
+					</div>
 				</>
 			)}
 		</>
 	);
 }
+
 export default IssueDetail;

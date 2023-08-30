@@ -1,6 +1,7 @@
-import React from 'react';
 import { IssueListType } from '../../utils/types/issueList.interface';
 import { useNavigate } from 'react-router-dom';
+import styles from '../../utils/styles/IssueItem.module.scss';
+import { getDate } from '../../utils/getDate';
 
 function IssueItem({ item }: { item: IssueListType }) {
 	const navigate = useNavigate();
@@ -10,20 +11,21 @@ function IssueItem({ item }: { item: IssueListType }) {
 	return (
 		<>
 			<li
+				className={styles.item}
 				key={item.number}
 				onClick={() => {
 					showIssueDetail(item.number);
 				}}
 			>
-				<div>
+				<div className={styles.info}>
 					<h2>
-						<span>#{item.number}</span> {item.title}
+						<span className={styles['issue-number']}>#{item.number}</span> {item.title}
 					</h2>
-					<span>
-						작성자: {item.user.login}, 작성일: {item.created_at}
+					<span className={styles['sub-info']}>
+						작성자: {item.user.login}, 작성일: {getDate(item.created_at)}
 					</span>
 				</div>
-				<span>댓글수: {item.comments}</span>
+				<span className={styles['sub-info']}>댓글수: {item.comments}</span>
 			</li>
 		</>
 	);
