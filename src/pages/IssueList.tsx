@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from 'react';
 import { getIssueList } from '../api/api';
-import { IssueListType } from '../utils/types/issueList.interface';
+import { IssueListType } from '../types/issueList.interface';
 import Spinner from '../components/layout/Spinner';
 import IssueItem from '../components/IssueItem';
 import { useNavigate } from 'react-router-dom';

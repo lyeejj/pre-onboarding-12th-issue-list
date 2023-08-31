@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
-import { IssueListType } from '../utils/types/issueList.interface';
+import { IssueListType } from '../types/issueList.interface';
 import { getIssueDetail } from '../api/api';
 import IssueItem from '../components/IssueItem';
 import Spinner from '../components/layout/Spinner';
-import styles from '../utils/styles/IssueDetail.module.scss';
+import styles from '../styles/IssueDetail.module.scss';
 
 function IssueDetail() {
 	const [detail, setDetail] = useState<IssueListType>();

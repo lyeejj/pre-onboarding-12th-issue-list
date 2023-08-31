@@ -3,7 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import { Suspense, lazy } from 'react';
 import Layout from './components/layout/Layout';
 import Spinner from './components/layout/Spinner';
-import './utils/styles/reset.scss';
+import './styles/reset.scss';
 
 const IssueList = lazy(() => import('./pages/IssueList'));
 const IssueDetail = lazy(() => import('./pages/IssueDetail'));

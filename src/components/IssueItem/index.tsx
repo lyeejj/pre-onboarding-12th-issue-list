@@ -1,6 +1,6 @@
-import { IssueListType } from '../../utils/types/issueList.interface';
+import { IssueListType } from '../../types/issueList.interface';
 import { useNavigate } from 'react-router-dom';
-import styles from '../../utils/styles/IssueItem.module.scss';
+import styles from '../../styles/IssueItem.module.scss';
 import { getDate } from '../../utils/getDate';
 
 function IssueItem({ item }: { item: IssueListType }) {
