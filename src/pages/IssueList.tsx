@@ -1,9 +1,10 @@
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef, Fragment } from 'react';
 import { getIssueList } from '../api/api';
 import { IssueListType } from '../types/issueList.interface';
 import Spinner from '../components/layout/Spinner';
 import IssueItem from '../components/IssueItem';
 import { useNavigate } from 'react-router-dom';
+import AdBanner from '../components/AdBanner';
 
 function IssueList() {
 	const [list, setList] = useState<IssueListType[]>([]);
@@ -47,8 +48,11 @@ function IssueList() {
 	return (
 		<>
 			<ul>
-				{list.map(item => (
-					<IssueItem item={item} key={item.id} />
+				{list.map((item, index) => (
+					<Fragment key={item.id}>
+						<IssueItem item={item} />
+						{(index + 1) % 4 === 0 && <AdBanner />}
+					</Fragment>
 				))}
 			</ul>
 			<div ref={observerRef}>
