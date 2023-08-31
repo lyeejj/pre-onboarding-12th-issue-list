@@ -1,7 +1,7 @@
 import { Octokit } from 'octokit';
 import { API_INFO } from '../utils/constants';
 
-const octokit = new Octokit({ auth: process.env.REACT_APP_API_TOKEN });
+const octokit = new Octokit();
 
 export const getIssueList = async (page: number) => {
 	const res = await octokit.request('GET /repos/{owner}/{repo}/issues', {
