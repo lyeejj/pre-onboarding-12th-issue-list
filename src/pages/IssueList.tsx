@@ -51,7 +51,9 @@ function IssueList() {
 					<IssueItem item={item} key={item.id} />
 				))}
 			</ul>
-			<div ref={observerRef} style={{ height: '10px', margin: '1px' }}></div>
+			<div ref={observerRef}>
+				<Spinner scroll />
+			</div>
 		</>
 	);
 }
